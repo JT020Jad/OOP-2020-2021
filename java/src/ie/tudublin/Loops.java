@@ -26,13 +26,67 @@ public class Loops extends PApplet {
         colorMode(HSB);
     }
 
-    public void draw() {
+    public void draw() 
+    {
         background(0);
+        noStroke();
         switch (mode)
         {
             case 0:
-                ellipse(cx, cy, 100, 100);
+                if (mouseX < cx)
+                {
+                    fill(80,255,255);
+                    rect(0, 0, cx, height);
+                }
+
+                else
+                {
+                    rect(cx, 0, cx, height);
+                }
                 break;
-        }
-    }
-}
+
+
+            case 1:
+                if(mouseX < cx && mouseY < cy)
+                {
+                    fill(80,255,255);
+                    rect(0, 0, cx, cy);
+                }
+
+                else if (mouseX > cx && mouseY < cy)
+                {
+                    rect(cx, 0, cx, cy);
+                }
+
+                else if (mouseX < cx && mouseY > cy)
+                {
+                    rect(0, cy, cx, cy);
+                }
+
+                else
+                {
+                    rect(cx, cy, cx, cy);
+                }
+                break;
+
+            
+            case 2:
+                int numRects = (int)(mouseX / 10.0f);
+                float w = width / (float) numRects;
+                float cgap = 255 / (float) numRects;
+
+                for(int i = 0; i < numRects; i++)
+                {
+                    fill(i * cgap, 255, 255);
+                    rect(i * w, 0, w, height);
+                } // End for
+                break;
+
+            
+                case 3:
+                
+                break;
+
+        } // End switch(mode)
+    } // End draw()
+} // End class loops
